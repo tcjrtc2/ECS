@@ -4,7 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exquisite Counseling Services – Referrals</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap');
 
@@ -91,7 +94,7 @@
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
   <script>
     (function() {
-      emailjs.init("CRY9t7KxoT1lJ5RjG");
+      emailjs.init("CRY9t7KxoT1lJ5RjG"); // your EmailJS user ID
     })();
   </script>
 </head>
@@ -131,6 +134,9 @@
           <input type="email" id="user_email" name="user_email" placeholder="you@example.com" required>
         </label>
 
+        <!-- Hidden “email” field to satisfy your template’s {{email}} placeholder -->
+        <input type="hidden" id="email" name="email" />
+
         <!-- Primary Number -->
         <label for="user_phone">
           Primary Number<br>
@@ -155,13 +161,13 @@
     <p>4410 Claiborne Sq. E., Ste. 343, Hampton, VA 23666 | 
        <a href="tel:+17579698584" style="color:#FFD700;">(757) 969-8584</a>
     </p>
-  
     <p>
-      <a href="https://www.instagram.com/exquisitecounseling/?utm_source=ig_embed&utm_campaign=loading" target="_blank" style="color: #FFD700; text-decoration: none; font-weight: bold;">
+      <a href="https://www.instagram.com/exquisitecounseling/?utm_source=ig_embed&utm_campaign=loading" 
+         target="_blank" 
+         style="color: #FFD700; text-decoration: none; font-weight: bold;">
         Follow us on Instagram
       </a>
     </p>
-
   </footer>
 
   <script>
@@ -169,7 +175,10 @@
       event.preventDefault();
       const statusEl = document.getElementById('status');
 
-      // Send the form data to EmailJS using your Service ID and Template ID:
+      // Copy the “Contact Email” value into the hidden <input name="email"> before sending:
+      document.getElementById('email').value = document.getElementById('user_email').value;
+
+      // Now send the form to EmailJS (be sure that your Service ID & Template ID match):
       emailjs.sendForm('service_n4dsmim', 'template_q3325mh', this)
         .then(() => {
           statusEl.style.color = 'lightgreen';
