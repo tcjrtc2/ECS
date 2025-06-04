@@ -25,7 +25,28 @@
       padding: 0;
       transition: background 0.2s ease-out;
     }
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(255,255,255,0.5);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(255,255,255,0.9);
+  }
+}
 
+/* Slowed-down glow on each item */
+.accepted-insurance li {
+  display: inline-block;
+  margin: 0 1rem;
+  animation: glow 4s ease-in-out infinite;
+}
+
+/* Staggered delays (evenly spaced over the 4s) */
+.accepted-insurance li:nth-child(1) { animation-delay: 0s; }
+.accepted-insurance li:nth-child(2) { animation-delay: 0.8s; }
+.accepted-insurance li:nth-child(3) { animation-delay: 1.6s; }
+.accepted-insurance li:nth-child(4) { animation-delay: 2.4s; }
+.accepted-insurance li:nth-child(5) { animation-delay: 3.2s; }
     header {
       background-color: #FFF;
       color: #FFD700;
