@@ -13,193 +13,266 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 
   <style>
-    :root { --bg-angle: 180deg; }
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap');
+    :root {
+      --primary-color: #FFD700;
+      --secondary-color: #FFA500;
+      --accent-color: #FFED4E;
+      --text-dark: #FFD700;
+      --text-light: #E6C200;
+      --bg-dark: #0a0a0a;
+      --bg-card: #1a1a1a;
+      --border-color: #333333;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+    * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(var(--bg-angle), #1b1b1b, #121212);
-      background-attachment: fixed;
-      color: #FFD700;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
       margin: 0;
       padding: 0;
-      transition: background 0.2s ease-out;
+      line-height: 1.6;
     }
-@keyframes glow {
-  0%, 100% {
-    text-shadow: 0 0 4px rgba(255,255,255,0.5);
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  50% {
-    text-shadow: 0 0 12px rgba(255,255,255,0.9);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Slowed-down glow on each item */
+.accepted-insurance {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
 .accepted-insurance li {
   display: inline-block;
-  margin: 0 1rem;
-  animation: glow 4s ease-in-out infinite;
+  margin: 0;
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  animation: fadeSlideIn 0.6s ease-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: var(--primary-color);
+  white-space: nowrap;
 }
 
-/* Staggered delays (evenly spaced over the 4s) */
-.accepted-insurance li:nth-child(1) { animation-delay: 0s; }
-.accepted-insurance li:nth-child(2) { animation-delay: 0.8s; }
-.accepted-insurance li:nth-child(3) { animation-delay: 1.6s; }
-.accepted-insurance li:nth-child(4) { animation-delay: 2.4s; }
-.accepted-insurance li:nth-child(5) { animation-delay: 3.2s; }
+.accepted-insurance li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,215,0,0.3);
+  border-color: var(--primary-color);
+}
+
+.accepted-insurance li:nth-child(1) { animation-delay: 0.1s; opacity: 0; }
+.accepted-insurance li:nth-child(2) { animation-delay: 0.2s; opacity: 0; }
+.accepted-insurance li:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
+.accepted-insurance li:nth-child(4) { animation-delay: 0.4s; opacity: 0; }
+.accepted-insurance li:nth-child(5) { animation-delay: 0.5s; opacity: 0; }
     header {
-      background-color: #FFF;
-      color: #FFD700;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background: var(--bg-card);
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
       position: sticky;
       top: 0;
       z-index: 1000;
-      transition: background-color 0.5s ease;
-    }
-    header.scrolled {
-      background-color: rgba(255,255,255,0.9);
+      transition: all 0.3s ease;
+      border-bottom: 2px solid var(--primary-color);
+      overflow: hidden;
+      text-align: center;
     }
     header::before {
       content: "";
       position: absolute;
-      top: 0; left: -50%; width: 200%; height: 100%;
-      background: linear-gradient(120deg, rgba(255,215,0,0.2) 30%, rgba(255,215,0,0.7) 50%, rgba(255,215,0,0.2) 70%);
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 215, 0, 0.4) 50%, transparent 70%);
       transform: skewX(-30deg);
       animation: shimmer 4s ease-in-out infinite;
+      pointer-events: none;
     }
     @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+      0% { transform: translateX(-100%) skewX(-30deg); }
+      100% { transform: translateX(100%) skewX(-30deg); }
     }
-
+    header.scrolled {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      padding: 1rem 2rem;
+    }
+    
     .logo {
       max-width: 120px;
       height: auto;
       z-index: 1;
       position: relative;
+      display: inline-block;
     }
 
     nav ul {
       list-style: none;
       padding: 0;
-      margin: 0;
+      margin: 1rem 0 0;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 1;
     }
     nav ul li {
-      margin: 0 1rem;
+      margin: 0;
     }
     nav ul li a {
-      color: #FFD700;
+      color: var(--text-dark);
       text-decoration: none;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      transition: color 0.4s ease, text-shadow 0.4s ease;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
     }
     nav ul li a:hover {
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      background: var(--primary-color);
+      color: #000;
     }
 
     .container {
       width: 90%;
       max-width: 1200px;
       margin: auto;
-      padding: 60px 0;
+      padding: 3rem 0;
     }
 
     section {
-      padding: 60px 20px;
+      padding: 3rem 2rem;
       text-align: center;
-      background: rgba(26,26,26,0.85);
-      border-radius: 10px;
+      background: var(--bg-card);
+      border-radius: 16px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      margin-bottom: 40px;
-      color: #FFD700;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    
+    section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(255,215,0,0.2);
+      border-color: var(--primary-color);
+    }
+    
+    section h1, section h2 {
+      color: var(--text-dark);
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+    }
+    
+    section h1 { font-size: 2.5rem; font-weight: 700; }
+    section h2 { font-size: 2rem; font-weight: 600; }
+    section p { color: var(--text-light); max-width: 800px; margin: 1rem auto; }
+    section ul { color: var(--text-light); }
 
-    /* Add spacing between list items */
     section ul li {
       margin-bottom: 0.5rem;
     }
 
     .calendly-button {
-      background-color: #FFD700;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: #000;
-      padding: 14px 28px;
+      padding: 14px 32px;
       border: none;
-      border-radius: 6px;
-      font-family: 'Poppins', sans-serif;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-      box-shadow: 0 6px 16px rgba(255,215,0,0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(255,215,0,0.3);
       display: inline-block;
-      position: relative;
-      overflow: hidden;
+      font-size: 1rem;
     }
     .calendly-button:hover {
-      background-color: #FFA500;
-      transform: scale(1.07);
-      box-shadow: 0 8px 20px rgba(255,165,0,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,215,0,0.5);
     }
 
     a {
-      color: #FFD700;
+      color: var(--primary-color);
       text-decoration: none;
       transition: color 0.3s ease;
+      font-weight: 500;
     }
     a:hover {
-      color: #fff;
+      color: var(--secondary-color);
     }
+    
+    footer {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-top: 2px solid var(--primary-color);
+      margin-top: 3rem;
+    }
+    footer p { color: var(--text-light); margin: 0.5rem 0; }
 
-    /* ================================
-       Responsive Adjustments
-       ================================ */
     @media (max-width: 992px) {
-      .logo {
-        max-width: 100px;
-      }
-      section {
-        padding: 50px 15px;
-      }
+      .logo { max-width: 100px; }
+      section { padding: 2.5rem 1.5rem; }
+      section h1 { font-size: 2rem; }
+      section h2 { font-size: 1.75rem; }
     }
 
     @media (max-width: 768px) {
       nav ul {
         flex-direction: column;
+        gap: 0.25rem;
       }
-      nav ul li {
-        margin: 0.5rem 0;
+      nav ul li a {
+        display: block;
+        text-align: center;
       }
-      .logo {
-        max-width: 80px;
-      }
+      .logo { max-width: 80px; }
       section {
-        padding: 40px 10px;
+        padding: 2rem 1rem;
+        margin-bottom: 1.5rem;
       }
-      .container {
-        padding: 40px 0;
+      .container { padding: 2rem 0; }
+      section h1 { font-size: 1.75rem; }
+      section h2 { font-size: 1.5rem; }
+      
+      .accepted-insurance {
+        gap: 0.75rem;
+      }
+      .accepted-insurance li {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
       }
     }
 
     @media (max-width: 480px) {
-      header {
-        padding: 15px;
+      header { padding: 1rem; }
+      .logo { max-width: 70px; }
+      nav ul li a { font-size: 0.9rem; padding: 0.4rem 0.8rem; }
+      section { padding: 1.5rem 1rem; }
+      .container { padding: 1.5rem 0; }
+      section h1 { font-size: 1.5rem; }
+      section h2 { font-size: 1.25rem; }
+      
+      .accepted-insurance {
+        gap: 0.5rem;
       }
-      .logo {
-        max-width: 60px;
-      }
-      nav ul li a {
-        font-size: 0.9rem;
-      }
-      section {
-        padding: 30px 8px;
-      }
-      .container {
-        padding: 30px 0;
+      .accepted-insurance li {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
       }
     }
   
@@ -312,7 +385,7 @@
   </div>
 
   <footer style="text-align:center;">
-    <p>© 2025 Exquisite Counseling Services</p>
+    <p>© 2026 Exquisite Counseling Services</p>
     <p>
       4410 Claiborne Sq. E., Ste. 343, Hampton, VA 23666 |
       <a href="tel:+17579698584">(757) 969-8584</a> |

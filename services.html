@@ -7,54 +7,68 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"/>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet"/>
   <style>
-/* Continuous glow keyframes */
-@keyframes glow {
-  0%, 100% {
-    text-shadow: 0 0 4px rgba(255,255,255,0.5);
-  }
-  50% {
-    text-shadow: 0 0 12px rgba(255,255,255,0.9);
-  }
-}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
-/* Slowed-down glow on each item */
-.accepted-insurance li {
-  display: inline-block;
-  margin: 0 1rem;
-  animation: glow 4s ease-in-out infinite;
-}
-
-/* Staggered delays (evenly spaced over the 4s) */
-.accepted-insurance li:nth-child(1) { animation-delay: 0s; }
-.accepted-insurance li:nth-child(2) { animation-delay: 0.8s; }
-.accepted-insurance li:nth-child(3) { animation-delay: 1.6s; }
-.accepted-insurance li:nth-child(4) { animation-delay: 2.4s; }
-.accepted-insurance li:nth-child(5) { animation-delay: 3.2s; }
-
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap');
-
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #FFA500;
+            --text-dark: #FFD700;
+            --text-light: #E6C200;
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --border-color: #333333;
         }
+        
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #121212;
-            background-image: linear-gradient(to bottom, #1b1b1b, #121212);
-            color: #FFD700;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-dark);
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
+        
+.accepted-insurance {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.accepted-insurance li {
+  display: inline-block;
+  margin: 0;
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: var(--primary-color);
+  white-space: nowrap;
+}
+
+.accepted-insurance li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,215,0,0.3);
+  border-color: var(--primary-color);
+}
         header {
-            background-color: #FFFFFF;
-            color: #FFD700;
-            padding: 20px;
+            background: var(--bg-card);
+            padding: 1.5rem 2rem;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-color);
             overflow: hidden;
         }
-
         header::before {
             content: "";
             position: absolute;
@@ -62,141 +76,154 @@
             left: -50%;
             width: 200%;
             height: 100%;
-            background: linear-gradient(120deg, rgba(255, 215, 0, 0.2) 30%, rgba(255, 215, 0, 0.7) 50%, rgba(255, 215, 0, 0.2) 70%);
+            background: linear-gradient(120deg, transparent 30%, rgba(255, 215, 0, 0.4) 50%, transparent 70%);
             transform: skewX(-30deg);
-            animation: shimmer 3s infinite;
+            animation: shimmer 4s ease-in-out infinite;
+            pointer-events: none;
         }
-
         @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
+            0% { transform: translateX(-100%) skewX(-30deg); }
+            100% { transform: translateX(100%) skewX(-30deg); }
         }
 
         .logo {
-            max-width: 100%;
+            max-width: 120px;
             height: auto;
+            margin-bottom: 1rem;
             position: relative;
             z-index: 1;
-            background-color: #FFFFFF;
-            padding: 10px;
-            border-radius: 5px;
+            display: inline-block;
         }
 
         nav ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
         nav ul li {
-            display: inline-block;
-            margin: 0 15px;
+            margin: 0;
         }
         nav ul li a {
-            color: #FFD700;
-            text-decoration: none;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
         nav ul li a:hover {
-            color: #FFFFFF;
-            background-color: #000000;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            background: var(--primary-color);
+            color: #000;
         }
         .container {
             width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px 0;
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0;
         }
         section {
-            padding: 40px 20px;
+            padding: 3rem 2.5rem;
             text-align: center;
-            background-color: #1A1A1A;
-            background-image: linear-gradient(to bottom, #2a2a2a, #1A1A1A);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            color: #FFD700;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(255,215,0,0.2);
+            border-color: var(--primary-color);
         }
+        section h2, section h3 {
+            color: var(--text-dark);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+        section h2 { font-size: 2rem; font-weight: 600; }
+        section h3 { font-size: 1.5rem; font-weight: 600; margin-top: 2rem; }
+        section p { color: var(--text-light); line-height: 1.8; margin: 1rem 0; }
+        section ul { color: var(--text-light); }
+        section ul li { margin-bottom: 0.75rem; }
 
         .calendly-button {
-            background-color: #FFD700;
-            color: #000000;
-            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #000;
+            padding: 14px 32px;
             border: none;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            margin-top: 20px;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .calendly-button::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 215, 0, 0.3);
-            transition: all 0.5s ease;
-            border-radius: 50%;
-            z-index: 0;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0;
-        }
-
-        .calendly-button:hover::before {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255,215,0,0.3);
+            font-size: 1rem;
         }
 
         .calendly-button:hover {
-            background-color: #FFA500;
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(255, 165, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255,215,0,0.5);
         }
 
         .services ul {
             list-style-type: none;
             padding-left: 0;
-            text-align: center; /* Center the text */
+            text-align: center;
         }
 
         .services ul li {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            color: #FFD700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
         }
     
-a {
-    color: #FFD700;
-    text-decoration: none;
-}
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-a:hover {
-    color: #FFFFFF;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .accepted-insurance {
+                gap: 0.75rem;
+            }
+            .accepted-insurance li {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .accepted-insurance {
+                gap: 0.5rem;
+            }
+            .accepted-insurance li {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        footer {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-top: 2px solid var(--primary-color);
+            margin-top: 3rem;
+            text-align: center;
+        }
+        footer p { color: var(--text-light); margin: 0.5rem 0; }
 
 
   </style>
@@ -254,7 +281,7 @@ a:hover {
 
     </section>
   </div>  <footer style="text-align:center;">
-    <p>© 2025 Exquisite Counseling Services</p>
+    <p>© 2026 Exquisite Counseling Services</p>
     <p>4410 Claiborne Sq. E., Ste. 343, Hampton, VA 23666 | <a href="tel:+17579698584">(757) 969-8584</a> | Fax: (757) 826-4681 | <a href="mailto:exquisitecounseling@aol.com">exquisitecounseling@aol.com</a></p>
   
     <p>
